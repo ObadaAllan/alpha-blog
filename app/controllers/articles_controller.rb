@@ -7,8 +7,16 @@ end
 
 def create 
 @article = Article.new(article_params)
-@article.save
-redirect_to articles_show(@article)
+ if @article.save
+   flash['no tic'] = "Article Was successfully Created"
+   redirect_to article_path(@article)
+ else
+    render 'new'
+ end
+end
+
+def show
+@article = Article.find(params[:id])
 end
 
 private 
